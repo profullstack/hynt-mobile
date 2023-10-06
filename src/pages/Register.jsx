@@ -1,5 +1,7 @@
 import React, { useState } from 'react';
 import { View, StyleSheet, TextInput, Button, Alert, ScrollView } from 'react-native';
+import CountrySelect from '../components/CountrySelect';
+import countries from '../data/countries.js';
 
 const Register = () => {
   const [firstName, setFirstName] = useState('');
@@ -88,13 +90,7 @@ const Register = () => {
         autoCapitalize="none"
       />
       <View style={styles.phoneContainer}>
-        <TextInput
-          style={styles.phonePrefix}
-          placeholder="Prefix"
-          value={phonePrefix}
-          onChangeText={setPhonePrefix}
-          keyboardType="phone-pad"
-        />
+        <CountrySelect countries={countries} />
         <TextInput
           style={styles.phone}
           placeholder="Phone Number"
