@@ -6,7 +6,6 @@ function Home({ route, navigation }) {
   return (
     <View style={{ flex: 1, alignItems: "center", justifyContent: "center" }}>
       <GlobalNavbar navigation={navigation} />
-      {/* Include the GlobalNavbar component */}
       <Text>Home Screen</Text>
       <Button
         title="Go to Details"

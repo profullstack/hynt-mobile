@@ -1,19 +1,25 @@
-import React from 'react';
-import { View, Button } from 'react-native';
+import React from "react";
+import { View, Button } from "react-native";
 
 function GlobalNavbar({ navigation }) {
   return (
-    <View style={{ flexDirection: 'row', justifyContent: 'space-between' }}>
+    <View style={{ flexDirection: "row", justifyContent: "space-between" }}>
       <Button
-        title="Button 1"
+        title="Register"
         onPress={() => {
-          // Handle button 1 click here
+          navigation.navigate("Register", {
+            next: null,
+            ref: null,
+          });
         }}
       />
       <Button
-        title="Button 2"
+        title="Login"
         onPress={() => {
-          // Handle button 2 click here
+          navigation.navigate("Login", {
+            next: null,
+            ref: null,
+          });
         }}
       />
     </View>
