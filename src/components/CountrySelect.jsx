@@ -10,7 +10,8 @@ import {
 } from "react-native";
 
 const CountrySelect = ({ countries }) => {
-  const [selected, setSelected] = useState(countries?.["us"]);
+  console.log(countries);
+  const [selected, setSelected] = useState(countries?.["us_svg"]);
   const [filter, setFilter] = useState("");
   const [isOpen, setIsOpen] = useState(false);
 
@@ -41,7 +42,10 @@ const CountrySelect = ({ countries }) => {
         >
           <Image
             style={styles.flagIcon}
-            source={countries[selected.code.toLowerCase()].path}
+            source={
+              countries[selected.code.toLowerCase().replace("-", "_") + "_svg"]
+                .path
+            }
           />
           <Text>{selected.code.toUpperCase()}</Text>
           <TextInput
@@ -76,8 +80,12 @@ const CountrySelect = ({ countries }) => {
             >
               <Image
                 style={styles.flagIcon}
-                source={countries[item.code.toLowerCase()].path}
+                source={
+                  countries[item.code.toLowerCase().replace("-", "_") + "_svg"]
+                    .path
+                }
               />
+
               <Text>
                 {item.name} ({item.code.toUpperCase()}){" "}
                 {item.telephonePrefix || ""}
@@ -106,10 +114,10 @@ const styles = StyleSheet.create({
     marginBottom: 10,
   },
   listItem: {
-    display: 'flex',
-    justifyContent: 'flex-start',
-    alignItems: 'center',
-    flexDirection: 'row',
+    display: "flex",
+    justifyContent: "flex-start",
+    alignItems: "center",
+    flexDirection: "row",
     padding: 10,
     borderBottomWidth: 1,
     borderBottomColor: "#ccc",

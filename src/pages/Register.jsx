@@ -1,46 +1,59 @@
-import React, { useState } from 'react';
-import { View, StyleSheet, TextInput, Button, Alert, ScrollView } from 'react-native';
-import CountrySelect from '../components/CountrySelect';
-import countries from '../data/countries.js';
+import React, { useState } from "react";
+import {
+  View,
+  StyleSheet,
+  TextInput,
+  Button,
+  Alert,
+  ScrollView,
+} from "react-native";
+import CountrySelect from "../components/CountrySelect";
+import { flagIcons as countries } from "../data/countries.js";
 
 const Register = () => {
-  const [firstName, setFirstName] = useState('');
-  const [lastName, setLastName] = useState('');
-  const [username, setUsername] = useState('');
-  const [email, setEmail] = useState('');
-  const [password1, setPassword1] = useState('');
-  const [password2, setPassword2] = useState('');
-  const [phonePrefix, setPhonePrefix] = useState('');
-  const [phone, setPhone] = useState('');
+  const [firstName, setFirstName] = useState("");
+  const [lastName, setLastName] = useState("");
+  const [username, setUsername] = useState("");
+  const [email, setEmail] = useState("");
+  const [password1, setPassword1] = useState("");
+  const [password2, setPassword2] = useState("");
+  const [phonePrefix, setPhonePrefix] = useState("");
+  const [phone, setPhone] = useState("");
 
   const handleSignUp = async () => {
     if (password1 !== password2) {
-      Alert.alert('Error', 'Passwords do not match.');
+      Alert.alert("Error", "Passwords do not match.");
       return;
     }
 
     // Other validations can be added here...
 
     try {
-      const response = await fetch('API_ENDPOINT', {
-        method: 'POST',
+      const response = await fetch("API_ENDPOINT", {
+        method: "POST",
         headers: {
-          'Content-Type': 'application/json',
+          "Content-Type": "application/json",
         },
         body: JSON.stringify({
-          firstName, lastName, username, email, password: password1, phonePrefix, phone
+          firstName,
+          lastName,
+          username,
+          email,
+          password: password1,
+          phonePrefix,
+          phone,
         }),
       });
 
       const data = await response.json();
 
       if (data.success) {
-        Alert.alert('Success', 'User registered successfully!');
+        Alert.alert("Success", "User registered successfully!");
       } else {
-        Alert.alert('Error', data.message || 'Something went wrong.');
+        Alert.alert("Error", data.message || "Something went wrong.");
       }
     } catch (error) {
-      Alert.alert('Error', 'Failed to register user.');
+      Alert.alert("Error", "Failed to register user.");
     }
   };
 
@@ -111,20 +124,20 @@ const styles = StyleSheet.create({
   },
   input: {
     height: 40,
-    borderColor: 'gray',
+    borderColor: "gray",
     borderWidth: 1,
     marginBottom: 16,
     paddingHorizontal: 8,
     borderRadius: 5,
   },
   phoneContainer: {
-    flexDirection: 'row',
+    flexDirection: "row",
     marginBottom: 16,
   },
   phonePrefix: {
     flex: 1,
     height: 40,
-    borderColor: 'gray',
+    borderColor: "gray",
     borderWidth: 1,
     paddingHorizontal: 8,
     borderRadius: 5,
@@ -133,7 +146,7 @@ const styles = StyleSheet.create({
   phone: {
     flex: 3,
     height: 40,
-    borderColor: 'gray',
+    borderColor: "gray",
     borderWidth: 1,
     paddingHorizontal: 8,
     borderRadius: 5,
