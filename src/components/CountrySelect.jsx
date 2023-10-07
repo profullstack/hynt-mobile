@@ -32,6 +32,16 @@ const CountrySelect = ({ countries }) => {
   };
 
   const inputRef = useRef(null);
+  const selectedKey = selected.code.toLowerCase().replace("-", "_") + "_svg";
+  const FlagIcon = countries[selectedKey].path;
+  const FlagComponent = (
+    <FlagIcon
+      key={selectedKey}
+      width={30}
+      height={20}
+      style={styles.flagIcon}
+    />
+  );
 
   return (
     <View style={styles.dropdown}>
@@ -40,13 +50,7 @@ const CountrySelect = ({ countries }) => {
           style={styles.selected}
           onPress={() => setIsOpen(!isOpen)}
         >
-          <Image
-            style={styles.flagIcon}
-            source={
-              countries[selected.code.toLowerCase().replace("-", "_") + "_svg"]
-                .path
-            }
-          />
+          {FlagComponent}
           <Text>{selected.code.toUpperCase()}</Text>
           <TextInput
             value={selected.telephonePrefix || ""}
@@ -64,7 +68,6 @@ const CountrySelect = ({ countries }) => {
         <FlatList
           data={filteredCountries}
           keyExtractor={(item) => item.code}
-          disableVirtualization
           ListHeaderComponent={() => (
             <TextInput
               style={styles.filterInput}
@@ -74,25 +77,33 @@ const CountrySelect = ({ countries }) => {
               ref={inputRef}
             />
           )}
-          renderItem={({ item }) => (
-            <TouchableOpacity
-              style={styles.listItem}
-              onPress={() => handleSelectItem(item)}
-            >
-              <Image
-                style={styles.flagIcon}
-                source={
-                  countries[item.code.toLowerCase().replace("-", "_") + "_svg"]
-                    .path
-                }
-              />
+          renderItem={({ item }) => {
+            const key = item.code.toLowerCase().replace("-", "_") + "_svg";
+            const FlagIcon = countries[key].path;
 
-              <Text>
-                {item.name} ({item.code.toUpperCase()}){" "}
-                {item.telephonePrefix || ""}
-              </Text>
-            </TouchableOpacity>
-          )}
+            const FlagComponent = (
+              <FlagIcon
+                key={key}
+                width={30}
+                height={20}
+                style={styles.flagIcon}
+              />
+            );
+
+            return (
+              <TouchableOpacity
+                style={styles.listItem}
+                onPress={() => handleSelectItem(item)}
+              >
+                {FlagComponent}
+
+                <Text>
+                  {item.name} ({item.code.toUpperCase()}){" "}
+                  {item.telephonePrefix || ""}
+                </Text>
+              </TouchableOpacity>
+            );
+          }}
         />
       )}
     </View>
@@ -124,7 +135,7 @@ const styles = StyleSheet.create({
     borderBottomColor: "#ccc",
   },
   flagIcon: {
-    width: 20,
+    width: 30,
     height: 20,
     marginRight: 10,
   },
