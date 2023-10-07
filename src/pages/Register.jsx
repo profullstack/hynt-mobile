@@ -58,7 +58,7 @@ const Register = () => {
   };
 
   return (
-    <ScrollView style={styles.container}>
+    <View style={styles.container}>
       <TextInput
         style={styles.input}
         placeholder="First Name"
@@ -113,7 +113,7 @@ const Register = () => {
         />
       </View>
       <Button title="Sign Up" onPress={handleSignUp} />
-    </ScrollView>
+    </View>
   );
 };
 

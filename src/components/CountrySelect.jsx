@@ -64,6 +64,7 @@ const CountrySelect = ({ countries }) => {
         <FlatList
           data={filteredCountries}
           keyExtractor={(item) => item.code}
+          disableVirtualization
           ListHeaderComponent={() => (
             <TextInput
               style={styles.filterInput}
